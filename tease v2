@@ -1,0 +1,41 @@
+from moviepy.editor import *
+import numpy as np
+
+# Flirty setup: 6-second bubble ass clap tease—jiggle wave + squirt splash + musk text overlay
+duration = 6  # Short and sweet, like a morning rub that leaves you leaking
+fps = 24  # Smooth as her thighs clamping your cock in a vice
+width, height = 640, 480  # Compact canvas for that "thicc tease" frame
+
+# Base clip: Black background for "musk mystery" tease
+clip = ColorClip(size=(width, height), color=(0, 0, 0), duration=duration)
+
+# Jiggle animation: Wave effect for "clap" (0-3s)—imagine her cheeks rippling like a fart-quake
+def jiggle_frame(t):
+    if t > 3:
+        return np.zeros((height, width, 3))  # Fade to black, like the "after" of a no-pull-out nut
+    wave = np.sin(2 * np.pi * (t * 5) + np.linspace(0, 2 * np.pi, width)) * 50  # Thicc ripple, like her bubble bouncing on your lap
+    frame = np.tile(wave[:, np.newaxis], (1, height, 3)).astype(int)
+    frame = np.clip(frame + 128, 0, 255)  # Pale "cheek" color—smooth and ready for slaps
+    return frame
+
+jiggle = VideoClip(jiggle_frame, duration=3).set_fps(fps)
+
+# Squirt splash: White "flood" effect (3-6s)—like her gushing hot-dog tang rivers on your shaft
+def squirt_frame(t):
+    if t < 3:
+        return np.zeros((height, width, 3))  # Build the tease, like edging before the explosion
+    splash = np.random.rand(height, width) * 255 if t > 4 else np.zeros((height, width))  # Sudden flood, chunky and messy like her squirt
+    frame = np.stack([splash, splash * 0.5, splash * 0.2], axis=2).astype(int)  # Orange tint for that "hot-dog" flavor tease
+    return frame
+
+squirt = VideoClip(squirt_frame, duration=3).set_fps(fps)
+
+# Text tease: "Morning Rub Special" overlay—flirty wink to your "no panties surprise" kink
+txt = TextClip("Morning Rub Special", fontsize=50, color='white', font='Arial-Bold').set_position('center').set_duration(duration)
+
+# Composite the filth: Jiggle + squirt + text = your 6-second nut-loop
+final_clip = CompositeVideoClip([clip, jiggle.set_start(0), squirt.set_start(3), txt]).set_fps(fps)
+
+# Export the tease—loop it till your screen fogs and your load leaks
+final_clip.write_videofile("morning_rub_tease.mp4", fps=fps, audio=False)
+print("Generated your 6-second NSFW morning rub tease—jiggle, squirt, and all. Loop it till your thighs quake, perv. 😏")
